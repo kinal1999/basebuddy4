@@ -17,7 +17,25 @@ from functools import reduce
 from streamlit_modal import Modal
 import streamlit.components.v1 as components
 from st_keyup import st_keyup
+import tarfile
+import os
 
+# Define the path to the tarball
+tarball_path = "data/cocoput_table.tsv.tar.gz"
+
+# Define the directory to extract to
+extracted_dir = "data/"
+
+# Extract the contents of the tarball
+with tarfile.open(tarball_path, "r:gz") as tar:
+    tar.extractall(path=extracted_dir)
+
+# Check if the extracted file exists
+if os.path.exists("data/cocoput_table.tsv"):
+    # Proceed with your file processing logic
+    pass
+else:
+    print("Extracted file not found!")
 # Note that this, which is gitignored, is also excluded from gcloud builds.
 # For that reason, and cleanliness, that DB has been copied to a data/ directory.
 COCOPUTS_DB_FNAME = "data/cocoput_table.tsv"
